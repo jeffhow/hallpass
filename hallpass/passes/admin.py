@@ -5,15 +5,54 @@ from .models import Student, Destination, HallPass, Building, Profile, Category
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export.fields import Field
+from django.utils import timezone
+from datetime import timedelta
 
 class StudentResource(resources.ModelResource):
     class Meta:
         model = Student
-        fields = ('id', 'first_name', 'last_name', 'student_id', 'building')
+        fields = ('id', 'first_name', 'last_name', 'student_id', 'building', 'yog')
+
+class StudentListFilter(admin.SimpleListFilter):
+    import datetime
+    title = "Year of Graduation"
+    parameter_name = "Year"
+
+    def lookups(self, reqest, model_admin):
+        return [
+            ("0", "Freshman"),
+            ("1", "Sophomore"),
+            ("2", "Junior"),
+            ("3", "Senior"),
+        ]
+    
+    def queryset(self, request, queryset):
+        curent_year = timezone.now().year
+        if timezone.now().month in range(8,12):
+            if self.value() == "0":
+                return queryset.filter(yog=(curent_year+4))
+            elif self.value() == "1":
+                return queryset.filter(yog=(curent_year+3))
+            elif self.value() == "2":
+                return queryset.filter(yog=(curent_year+2))
+            elif self.value() == "3":
+                return queryset.filter(yog=(curent_year+1))
+        else: 
+            if self.value() == "0":
+                return queryset.filter(yog=(curent_year+3))
+            elif self.value() == "1":
+                return queryset.filter(yog=(curent_year+2))
+            elif self.value() == "2":
+                return queryset.filter(yog=(curent_year+1))
+            elif self.value() == "3":
+                return queryset.filter(yog=(curent_year))
+
 
 class StudentImportExportAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = StudentResource
-    list_display = ('first_name', 'last_name', 'student_id', 'building')
+    list_display = ('first_name', 'last_name', 'student_id', 'building', 'yog')
+    list_filter = (StudentListFilter, 'first_name', 'last_name', 'student_id', 'building', 'yog')
+    list_display = ('first_name', 'last_name', 'student_id', 'building', 'yog')
 
 admin.site.register(Student, StudentImportExportAdmin)
 
@@ -45,8 +84,6 @@ class HallPassAdminResource(resources.ModelResource):
         model = HallPass
         fields = ('id', 'student_id__student_id', 'student_id__first_name', 'student_id__last_name', 'destination__room', 'time_in', 'time_out', 'arrival_time')
 
-from django.utils import timezone
-from datetime import timedelta
 class HallPassListFilter(admin.SimpleListFilter):
     title = "Weekly Report"
     parameter_name = "week"
@@ -65,6 +102,8 @@ class HallPassListFilter(admin.SimpleListFilter):
             today = timezone.now()
             last_monday = today + timedelta(days=-today.weekday(), weeks=-weeks_past)
             return queryset.filter(time_in__gte = last_monday).filter(time_in__lte = last_monday + timedelta(5))
+        
+
 
 class HallPassImportExportAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = HallPassAdminResource
