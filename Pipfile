@@ -18,6 +18,8 @@ django-wsgi = "*"
 django-allauth = "*"
 django-bootstrap5 = "*"
 django-toggle-switch-widget = "*"
+requests = "*"
+jwt = "*"
 
 [dev-packages]
 
