@@ -18,7 +18,7 @@
     {% csrf_token %}
     <div class="login-button">
     <button class="btn btn-outline-primary w-100" type="submit">
-        <img style="width: 25px" src="{% static images/web_light_sq_SI.svg %}" alt="Sign in with Google">
+        <img src="{% static 'images/web_light_sq_SI.svg' %}" alt="Sign in with Google">
     </button>
 </div>
 <p class = "login-terms">By signing up, you agree to the <a href="{% url 'terms' %}" >Terms of Use</a> and <a href="{% url 'privacy' %}" >Privacy Policy</a>, including Cookie Use.</p>
