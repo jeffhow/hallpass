@@ -1,0 +1,35 @@
+.student-sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 15px 10px;
+    top: 0;
+    margin-bottom: 20px;
+    padding-left: 120px;
+
+    label {
+        display: none;
+    }
+
+    h1 {
+        font-family: "Roboto", sans-serif;
+        font-weight: 900;
+        font-style: italic;
+        font-size: 1.9rem;
+        color: $primary;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .student-sign-in-form {
+        display: inline-block;
+        min-width: 420px;
+        margin: auto;
+    }
+
+    .notice {
+        font-style: italic;
+        margin-top: -8px;
+    }
+}

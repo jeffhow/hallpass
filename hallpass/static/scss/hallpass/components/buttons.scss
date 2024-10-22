@@ -1,0 +1,27 @@
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 15px;
+}
+
+a {
+    color: #dbd9d9;
+
+    &:hover {
+        color: #79a2cc;
+    }
+}
+
+// .btn {
+
+// }
+
+// .btn-primary {
+
+// }
+
+// .btn-secondary {
+
+// }

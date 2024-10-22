@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+h1 {
+    color: $header-font-color;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 3rem;
+}
+
+body {
+    background-color: $body-color;
+}
+
+.site-footer {
+    background-color: $navbar-color;
+    color: $primary;
+
+}
+
+a,p,label,span,h2,em{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.fa-secondary {
+    color: #ffe03c;
+  }
+
+  .fa-primary {
+    color: #ffe03c;
+  }
+.fa-primary,
+.fa-secondary {
+  transition: $soft;
+}
+
+svg {
+    max-width: 65px;
+}

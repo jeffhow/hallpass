@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # the App!
     'passes.apps.PassesConfig',
     # import/export
@@ -168,7 +169,6 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'sass_processor.finders.CssFinder',
 ]
-
 STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'static'

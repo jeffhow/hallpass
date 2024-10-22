@@ -1,19 +1,67 @@
 .navbar {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  left: -250px;
+  height: 100vh;
   background-color: $navbar-color;
-  transition: width 600ms ease;
-  overflow: hidden;
   z-index: 1;
   overflow: hidden;
   color: $link-color;
-  text-decoration: none;
-  transition: $soft;
-  align-items: start;
+  padding-left: 15px;
+  padding-right: 8px;
+  transition: all 600ms ease;
+  box-shadow: 3px 0 12px 0 rgba(0,0,0,0.3);
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: $primary-hover;
+  &:has(#menu:checked) {
+    transform: translate(250px);
+  }
+
+  .navbar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: end;
+
+    .brand {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 15px;
+        h1 {
+            line-height: 1.6rem;
+            margin: 0 8px 0 0;
+        }
+        #menu {
+            position: absolute;
+            right: 8px;
+            width: 65px;
+            height: 65px;
+            z-index: 1;
+            opacity: 0;
+            &:hover ~ svg {
+                filter: grayscale(1);
+            }
+        }
+        #menu:focus-visible ~ svg {
+            outline: 1px solid white !important;
+            border-radius: 5px;
+        }
+
+        #menu:checked ~ svg {
+            transform: rotate(0);
+        }
+        svg {
+            width: 65px;
+            height: 100%;
+            transform: rotate(180deg);
+            transition: $soft;
+            margin-right: 8px;
+        }
+    }
+
   }
 
   .navbar-nav {
@@ -24,54 +72,59 @@
     flex-direction: column;
     align-items: left;
     height: 100%;
+    gap: 1rem;
   }
 
-  .nav-link {
-    color: $link-color;
-    text-decoration: none;
-    transition: $soft;
-    opacity: 0;
-    overflow: visible;
-    white-space: nowrap;
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: $primary-hover;
-      transition: 0.1s;
-    }
-  }
-
-  .nav-button {
-
-    .nav-item {
-      justify-content: space-between;
-      width: 100%;
+  .nav-item {
       display: flex;
-      align-self: left;
-      gap: 4em;
-      margin-bottom: 1rem;
+      justify-content: end;
+      align-items: center;
+      width: 100%;
+      
+      .nav-link {
+        color: $link-color;
+        text-decoration: none;
+        transition: $soft;
+        overflow: visible;
+        white-space: nowrap;
+        transition: $soft;
 
-      svg {
-        order: -1;
-        min-width: 65px;
-        margin-left: 50px;
+        .nav-text {
+            transition: $soft;
+            font-size: 1.5rem;
+            position: relative;
+            top: 2px;
+        }
+
+        &:hover .nav-text,
+        &:focus .nav-text,
+        &:active .nav-text {
+          color: $primary-hover;
+        }
+        svg {
+            transition: $soft;
+        }
+        &:hover svg,
+        &:focus svg,
+        &:active svg {
+            // opacity: 0.8;
+            filter: brightness(1.3);
+        }
       }
 
-      #svg_SD {
-        margin-left: 15px;
+      svg {
+        min-width: 65px;
+        margin-left: 20px;
       }
 
       #svg_MD {
-        margin-left: 10px;
+        position: relative;
+        left: -5px;
       }
 
       #svg_L {
-        margin-left: 0px;
-      }
-
-      #svg_A {
-        margin-left: 10px;
+        position: relative;
+        left: -10px;
       }
 
       .nav-text {
@@ -89,224 +142,154 @@
     .nav-item:last-child {
       margin-top: auto;
     }
-  }
-}
-
-
-.logo {
-  top: 100%;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  font-size: 1.5rem;
-  letter-spacing: 0.3ch;
-  width: 100%;
-  display: flex;
-
-  svg {
-    transform: rotate(0deg);
-    transition: var(--transition-speed);
-    min-width: 85px;
-    order: -1;
-  }
+  
 }
 
 .footer-content {
-  align-self: end;
   margin-left: 1rem;
 
+  a {
+    padding-left: 0;
+    color: $link-color;
+    transition: $soft;
+    &:hover,
+    &:focus,
+    &:active {
+        color: $primary-hover;
+    }
+  }
+
   p {
-    opacity: 0;
     color: $primary;
   }
 
-  @media only screen and (min-width: 600px) {
-    .navbar {
-      top: 0;
-      width: 6.5rem;
-      height: 100vh;
-    }
+//   @media only screen and (min-width: 600px) {
+//     .navbar {
+//       top: 0;
+//       width: 6.5rem;
+//       height: 100vh;
+//     }
 
-    .navbar:hover {
-      width: 18rem;
-    }
+//     .navbar:hover {
+//       width: 18rem;
+//     }
 
-    .navbar:hover .logo svg {
-      order: 1;
-    }
+//     .navbar:hover .logo svg {
+//       order: 1;
+//     }
 
-    .navbar:hover .nav-button {
-      opacity: 1;
-    }
+//     .navbar:hover .nav-button {
+//       opacity: 1;
+//     }
 
-    .navbar:hover .nav-item svg {
+//     .navbar:hover .nav-item svg {
 
-      left: 100%;
-    }
+//       left: 100%;
+//     }
 
-    .navbar:hover .logo svg {
-      margin-left: 0rem;
-    }
+//     .navbar:hover .logo svg {
+//       margin-left: 0rem;
+//     }
 
-    .navbar:hover .logo .brand {
-      opacity: 1;
-    }
+//     .navbar:hover .logo .brand {
+//       opacity: 1;
+//     }
 
-    .navbar:hover .brand a {
-      left: 0px;
-      opacity: 1;
-      transition: 0.5s;
-    }
+//     .navbar:hover .brand a {
+//       left: 0px;
+//       opacity: 1;
+//       transition: 0.5s;
+//     }
 
-    .logo:hover .brand {
-      color: $primary-hover;
+//     .logo:hover .brand {
+//       color: $primary-hover;
 
-    }
+//     }
 
-    .navbar:hover .nav-text {
-      opacity: 1;
-    }
+//     .navbar:hover .nav-text {
+//       opacity: 1;
+//     }
 
-    .navbar .nav-button:hover {
-      .nav-text {
-        color: $primary-hover;
-      }
-    }
+//     .navbar .nav-button:hover {
+//       .nav-text {
+//         color: $primary-hover;
+//       }
+//     }
 
-    .navbar:hover .nav-link {
-      opacity: 1;
-    }
+//     .navbar:hover .nav-link {
+//       opacity: 1;
+//     }
 
-    .navbar:hover .footer-content p {
-      opacity: 1;
+//     .navbar:hover .footer-content p {
+//       opacity: 1;
 
-    }
+//     }
 
-  }
+//   }
 }
 
-// .nav-button .nav-item .nav-text {
-//   margin: 0; 
-//   padding: 0;
-//   transition: 0s;
-//   opacity: 0;
-//   text-decoration: none!important;
-//   color: $link-color;
-//   overflow: visible;
-//   white-space: nowrap;
-//   text-align: center;
-// }
-
-// .nav-button .nav-item {
-//   width: 100%;
-//   display: flex;
-//   align-self: left;
-//   gap: 4em;
-//   margin-bottom: 1rem;
-//   svg {
-//     order: -1;
-//     min-width: 65px;
-@media only screen and (min-width: 600px) {
-  .navbar {
-    top: 0;
-    width: 6.5rem;
-    height: 100vh;
-  }
-
-  .navbar:hover {
-    width: 18rem;
-  }
-
-  .navbar:hover .logo svg {
-    order: 1;
-  }
-
-  .navbar:hover .nav-button {
-    opacity: 1;
-  }
-
-  .navbar:hover .nav-item svg {
-
-    left: 100%;
-  }
-
-  .navbar:hover .logo svg {
-    margin-left: 0rem;
-  }
-
-  .navbar:hover .logo .brand {
-    opacity: 1;
-  }
-
-  .navbar:hover .brand a {
-    left: 0px;
-    opacity: 1;
-    transition: 0.5s;
-  }
-
-  .logo:hover .brand {
-    color: $primary-hover;
-
-  }
-
-  .navbar:hover .nav-text {
-    opacity: 1;
-  }
-
-  .navbar .nav-button:hover {
-    .nav-text {
-      color: $primary-hover;
-    }
-  }
-
-  .navbar:hover {
-    .nav-link {
-      opacity: 1;
-    }
-  }
-
-  .navbar:hover .footer-content p {
-    opacity: 1;
-
-  }
-
-}
-
-//   }
-//   #svg_SD {
-//     margin-left: 15px;
+// @media only screen and (min-width: 600px) {
+//   .navbar {
+//     top: 0;
+//     width: 6.5rem;
+//     height: 100vh;
 //   }
 
-//   #svg_MD {
-//     margin-left: 10px;
-//   }  
-
-//   #svg_L {
-//     margin-left: 0px;
-//   }  
-
-//   #svg_A {
-//     margin-left: 10px;
+//   .navbar:hover {
+//     width: 18rem;
 //   }
-// }
 
-// .nav-item:last-child {
-// margin-top: auto;
-// }
+//   .navbar:hover .logo svg {
+//     order: 1;
+//   }
 
+//   .navbar:hover .nav-button {
+//     opacity: 1;
+//   }
 
-// .logo svg {
-//     transform: rotate(0deg);
-//     transition: var(--transition-speed);
-//     min-width: 85px;
-//     order: -1;
-// }
+//   .navbar:hover .nav-item svg {
 
+//     left: 100%;
+//   }
 
-// .footer-content p {
-//   opacity: 0;
-//   color: $primary;
+//   .navbar:hover .logo svg {
+//     margin-left: 0rem;
+//   }
+
+//   .navbar:hover .logo .brand {
+//     opacity: 1;
+//   }
+
+//   .navbar:hover .brand a {
+//     left: 0px;
+//     opacity: 1;
+//     transition: 0.5s;
+//   }
+
+//   .logo:hover .brand {
+//     color: $primary-hover;
+
+//   }
+
+//   .navbar:hover .nav-text {
+//     opacity: 1;
+//   }
+
+//   .navbar .nav-button:hover {
+//     .nav-text {
+//       color: $primary-hover;
+//     }
+//   }
+
+//   .navbar:hover {
+//     .nav-link {
+//       opacity: 1;
+//     }
+//   }
+
+//   .navbar:hover .footer-content p {
+//     opacity: 1;
+
+//   }
+
 // }
